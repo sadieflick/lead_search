@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Ajax Pagination</title>
+    <link rel="stylesheet" type="text/css" href="static/css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+            
+</head>
+
+
+<body>
+    <form action="user/info" method="post">
+        Name: <input type="text" name="name" value="s"/>
+        From: <input type="date" name="date_from" value="2018-09-30"/>
+        To: <input type="date" name="date_to" value="2018-10-30"/>
+        <input type="hidden" name="page" value="1"/>
+        <input type="submit" value="Submit"/>
+    </form>
+
+    <div id="placeholder"></div>
+
+    <script>
+        function submitForm() {
+            $.ajax({
+                method: "post",
+                url: $("form").attr("action"),
+                data: $("form").serialize(),
+                success: function(resp) {
+                    $("#placeholder").html(resp)
+                }
+            });
+            console.log(resp);
+        }
+
+        $("input[name=name], input[name=date_from], input[name=date_to]").keyup(function() {
+            submitForm();
+        });
+
+        $(document).on("click", "a", function() {
+            $("input[name=page]").val($(this).attr("data-value"));
+            submitForm();
+        });
+
+        
+
+
+        $("form").submit(function(e){
+            e.preventDefault();
+            submitForm();
+        });
+    
+    </script>
+</body>
+
+
+</html>

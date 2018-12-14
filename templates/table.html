@@ -1,0 +1,30 @@
+
+{% for page in range(1, pages + 1) %}
+<a href="#" data-value="{{page}}">{{page}} |</a>
+
+{% endfor %}
+
+<table>
+    <tr>
+        <th>leads_id</th>
+        <th>first_name</th>
+
+        <th>last_name</th>
+
+        <th>registered at</th>
+
+        <th>email</th>
+
+    </tr>
+
+    {% for user in users %} 
+    <tr>
+        <td>{{user.id}}</td>
+        <td>{{user.first_name}}</td>
+        <td>{{user.last_name}}</td>
+        <td>{{user.created_at}}</td>
+        <td>{{user.email}}</td>
+    </tr>
+    {% endfor %}
+
+</table>
